@@ -1,4 +1,5 @@
 import React from 'react'
+import Loading from './components/loading'
 
 class App extends React.Component {
     constructor(props) {
@@ -17,10 +18,27 @@ class App extends React.Component {
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => this.setState({posts: data, loading: false}))
     }
 
     render() {
+
+        const click = () => [
+            this.setState ({singlePost: null})
+        ]
+
+        const singlePost = (e) => {
+            fetch(`https://jsonplaceholder.typicode.com/posts/${e.target.id}`)
+            .then(response => response.json())
+            .then(data => this.setState({singlePost: data}))
+        }
+
+        if(this.state.loading) {
+            <div className="loading">
+                <Loading loadingMessage={this.state.loadingMessage} />
+            </div>
+        }
+
         return (
             <h1>Hello World!</h1>
         )

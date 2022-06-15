@@ -46,9 +46,10 @@ body {
   font-family: 'Times New Roman', Times, serif;
   transition: all 0.5 ease;
   pointer-events: none;
-  font-size: calc(10px + 1vmin);
+  font-size: 20px;
   color: whitesmoke;
   margin: auto;
+  padding: 15px;
 }
 
 .button {

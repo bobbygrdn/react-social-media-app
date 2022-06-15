@@ -33,7 +33,7 @@ class App extends React.Component {
         const setUserId = (e) => {
             fetch(`https://jsonplaceholder.typicode.com/users/${e.target.id}`)
             .then(response => response.json())
-            .then(data => this.setState({user: data}))
+            .then(data => this.setState({user: data, users: null}))
         }
 
         const click = () => {
@@ -70,7 +70,7 @@ class App extends React.Component {
                     </div>
 
                     <HomeButton click={click} />
-                    <Users users={this.state.users}/>
+                    <Users users={this.state.users} setUserId={setUserId} />
                 </div>
             )
         }else if(this.state.user !== null) {

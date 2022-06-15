@@ -33,14 +33,23 @@ class App extends React.Component {
             .then(data => this.setState({singlePost: data}))
         }
 
-        if(this.state.loading) {
+        if(this.state.loading === true) {
             <div className="loading">
                 <Loading loadingMessage={this.state.loadingMessage} />
             </div>
         }
 
         return (
-            <h1>Hello World!</h1>
+            this.state.singlePost ? 
+            <div>
+                <singlePost singlePost={this.state.singlePost} />
+                <Button click={click} />
+            </div>
+            :
+            <div>
+                <h1 className="title">Gordon Media!</h1>
+                <Posts posts={this.state.posts} singlePost={singlePost} />
+            </div>
         )
     }
 }

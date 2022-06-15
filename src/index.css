@@ -14,11 +14,11 @@ body {
 
 .postItem {
   font-family: 'Times New Roman', Times, serif;
-  border-bottom: 4px solid whitesmoke;
+  border-bottom: 2px solid whitesmoke;
   border-radius: 5px;
   transition: all 0.5 ease;
   cursor: pointer;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: whitesmoke;
   width: fit-content;
 }
@@ -35,13 +35,18 @@ body {
   color: whitesmoke;
 }
 
+.postTitle {
+  font-size: 50px;
+  margin: auto;
+  text-align: center;
+  pointer-events: none;
+}
+
 .singlePost {
   font-family: 'Times New Roman', Times, serif;
-  border-bottom: 4px solid whitesmoke;
-  border-radius: 5px;
   transition: all 0.5 ease;
-  cursor: pointer;
-  font-size: calc(10px + 2vmin);
+  pointer-events: none;
+  font-size: calc(10px + 1vmin);
   color: whitesmoke;
   width: fit-content;
 }
@@ -69,4 +74,5 @@ body {
 .header {
   margin: 20px;
   display: inline-flex;
+  border: 5px solid black;
 }

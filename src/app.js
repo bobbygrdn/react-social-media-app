@@ -1,11 +1,12 @@
 import React from 'react'
 import Loading from './components/loading'
 import SinglePost from './components/singlePost'
-import HomeButton from './components/HomeButton'
+import HomeButton from './components/homeButton'
 import Posts from './components/posts'
 import GordonMedia from './img/gordonMedia.png'
 import Users from './components/users'
 import UserProfile from './components/userProfile'
+import UsersButton from './components/userButton'
 
 class App extends React.Component {
     constructor(props) {
@@ -38,12 +39,19 @@ class App extends React.Component {
         const click = () => {
             this.setState ({singlePost: null})
             this.setState ({user: null})
+            this.setState ({users: null})
         }
 
         const setSinglePost = (e) => {
             fetch(`https://jsonplaceholder.typicode.com/posts/${e.target.id}`)
             .then(response => response.json())
             .then(data => this.setState({singlePost: data}))
+        }
+
+        const setUsers = () => {
+            fetch('https://jsonplaceholder.typicode.com/users/')
+            .then(response => response.json())
+            .then(data => this.setState({users: data}))
         }
 
         if(this.state.loading === true) {
@@ -54,7 +62,17 @@ class App extends React.Component {
             )
         }
         if(this.state.users !== null){
-            <h1>hello world!</h1>
+            return(
+                <div>
+                <div className='header'>
+                    <h1 className="title">Gordon Media!</h1>
+                    <img src={GordonMedia} alt="none" className='icon' />
+                    </div>
+
+                    <HomeButton click={click} />
+                    <Users users={this.state.users}/>
+                </div>
+            )
         }else if(this.state.user !== null) {
             return (
                 <div>
@@ -74,8 +92,8 @@ class App extends React.Component {
                     <h1 className="title">Gordon Media!</h1>
                     <img src={GordonMedia} alt="none" className='icon' />
                 </div>
-                <SinglePost singlePost={this.state.singlePost} setUserId={setUserId} />
                 <HomeButton click={click} />
+                <SinglePost singlePost={this.state.singlePost} setUserId={setUserId} />
             </div>
             )
         } else {
@@ -85,6 +103,7 @@ class App extends React.Component {
                         <h1 className="title">Gordon Media!</h1>
                         <img src={GordonMedia} alt="none" className='icon' />
                     </div>
+                    <UsersButton getUsers={setUsers} />
                     <Posts posts={this.state.posts} setSinglePost={setSinglePost} setUserId={setUserId} />
                 </div>
             )

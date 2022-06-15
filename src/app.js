@@ -3,6 +3,7 @@ import Loading from './components/loading'
 import SinglePost from './components/singlePost'
 import Button from './components/button'
 import Posts from './components/posts'
+import GordonMedia from './img/gordonMedia.png'
 
 class App extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('https://jsonplaceholder.typicode.com/posts/')
         .then(response => response.json())
         .then(data => this.setState({posts: data, loading: false}))
     }
@@ -37,9 +38,11 @@ class App extends React.Component {
         }
 
         if(this.state.loading === true) {
+            return (
             <div className="loading">
                 <Loading loadingMessage={this.state.loadingMessage} />
             </div>
+            )
         }
 
         return (
@@ -50,7 +53,10 @@ class App extends React.Component {
             </div>
             :
             <div>
-                <h1 className="title">Gordon Media!</h1>
+                <div className='header'>
+                    <h1 className="title">Gordon Media!</h1>
+                    <img src={GordonMedia} alt="none" className='icon' />
+                </div>
                 <Posts posts={this.state.posts} setSinglePost={setSinglePost} />
             </div>
         )

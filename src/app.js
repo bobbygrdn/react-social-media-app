@@ -46,19 +46,25 @@ class App extends React.Component {
         }
 
         return (
+            
             this.state.singlePost ? 
             <div>
+                 <div className='header'>
+                    <h1 className="title">Gordon Media!</h1>
+                    <img src={GordonMedia} alt="none" className='icon' />
+                </div>
                 <SinglePost singlePost={this.state.singlePost} />
                 <Button click={click} />
             </div>
             :
             <div>
-                <div className='header'>
+                 <div className='header'>
                     <h1 className="title">Gordon Media!</h1>
                     <img src={GordonMedia} alt="none" className='icon' />
                 </div>
                 <Posts posts={this.state.posts} setSinglePost={setSinglePost} />
             </div>
+            
         )
     }
 }

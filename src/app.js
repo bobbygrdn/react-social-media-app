@@ -1,5 +1,8 @@
 import React from 'react'
 import Loading from './components/loading'
+import SinglePost from './components/singlePost'
+import Button from './components/button'
+import Posts from './components/posts'
 
 class App extends React.Component {
     constructor(props) {
@@ -27,7 +30,7 @@ class App extends React.Component {
             this.setState ({singlePost: null})
         ]
 
-        const singlePost = (e) => {
+        const setSinglePost = (e) => {
             fetch(`https://jsonplaceholder.typicode.com/posts/${e.target.id}`)
             .then(response => response.json())
             .then(data => this.setState({singlePost: data}))
@@ -42,13 +45,13 @@ class App extends React.Component {
         return (
             this.state.singlePost ? 
             <div>
-                <singlePost singlePost={this.state.singlePost} />
+                <SinglePost singlePost={this.state.singlePost} />
                 <Button click={click} />
             </div>
             :
             <div>
                 <h1 className="title">Gordon Media!</h1>
-                <Posts posts={this.state.posts} singlePost={singlePost} />
+                <Posts posts={this.state.posts} setSinglePost={setSinglePost} />
             </div>
         )
     }

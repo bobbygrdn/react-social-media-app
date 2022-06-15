@@ -1,9 +1,11 @@
 import React from 'react'
 import Loading from './components/loading'
 import SinglePost from './components/singlePost'
-import Button from './components/button'
+import HomeButton from './components/HomeButton'
 import Posts from './components/posts'
 import GordonMedia from './img/gordonMedia.png'
+import Users from './components/users'
+import UserProfile from './components/userProfile'
 
 class App extends React.Component {
     constructor(props) {
@@ -14,8 +16,8 @@ class App extends React.Component {
             singlePost: null,
             loading: true,
             loadingMessage: 'Data is currently being received from server. Please wait.',
-            User: null,
-            Users: null,
+            user: null,
+            users: null,
         }
     }
 
@@ -27,9 +29,16 @@ class App extends React.Component {
 
     render() {
 
-        const click = () => [
+        const setUserId = (e) => {
+            fetch(`https://jsonplaceholder.typicode.com/users/${e.target.id}`)
+            .then(response => response.json())
+            .then(data => this.setState({user: data}))
+        }
+
+        const click = () => {
             this.setState ({singlePost: null})
-        ]
+            this.setState ({user: null})
+        }
 
         const setSinglePost = (e) => {
             fetch(`https://jsonplaceholder.typicode.com/posts/${e.target.id}`)
@@ -44,28 +53,43 @@ class App extends React.Component {
             </div>
             )
         }
+        if(this.state.users !== null){
+            <h1>hello world!</h1>
+        }else if(this.state.user !== null) {
+            return (
+                <div>
+                <div className='header'>
+                    <h1 className="title">Gordon Media!</h1>
+                    <img src={GordonMedia} alt="none" className='icon' />
+                    </div>
 
-        return (
-            
-            this.state.singlePost ? 
+                    <HomeButton click={click} />
+                    <UserProfile user={this.state.user}/>
+                </div>
+            )
+        } else if(this.state.singlePost !== null) {
+            return(
             <div>
                  <div className='header'>
                     <h1 className="title">Gordon Media!</h1>
                     <img src={GordonMedia} alt="none" className='icon' />
                 </div>
-                <SinglePost singlePost={this.state.singlePost} />
-                <Button click={click} />
+                <SinglePost singlePost={this.state.singlePost} setUserId={setUserId} />
+                <HomeButton click={click} />
             </div>
-            :
-            <div>
-                 <div className='header'>
-                    <h1 className="title">Gordon Media!</h1>
-                    <img src={GordonMedia} alt="none" className='icon' />
+            )
+        } else {
+            return(
+                <div>
+                    <div className='header'>
+                        <h1 className="title">Gordon Media!</h1>
+                        <img src={GordonMedia} alt="none" className='icon' />
+                    </div>
+                    <Posts posts={this.state.posts} setSinglePost={setSinglePost} setUserId={setUserId} />
                 </div>
-                <Posts posts={this.state.posts} setSinglePost={setSinglePost} />
-            </div>
-            
-        )
+            )
+        }
+
     }
 }
 

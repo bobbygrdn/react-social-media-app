@@ -4,7 +4,7 @@ class PostItem extends React.Component{
     render() {
     
         const handleSetSinglePost = (e) => {
-            this.props.handleSetSinglePost(e)
+            this.props.setSinglePost(e)
         }
 
         return (

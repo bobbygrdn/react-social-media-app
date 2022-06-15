@@ -6,7 +6,7 @@ class Posts extends React.Component {
         
         return(
             this.props.posts.map((elem) => {
-                return <PostItem elem={elem} key={elem.id} setSinglePost={this.props.setSinglePost} />
+                return <PostItem elem={elem} key={elem.id} setSinglePost={this.props.setSinglePost} setUserId={this.props.setUserId} />
             })
         )
     }
